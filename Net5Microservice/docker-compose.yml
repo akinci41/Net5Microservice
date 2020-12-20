@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  postgresql:
+    image: postgres:alpine
+    container_name: postgresql
+    ports:
+      - "5430:5432"
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+    restart: always
+  directory:
+    image: ${DOCKER_REGISTRY-}directory
+    build:
+      context: .
+      dockerfile: Directory/Dockerfile
