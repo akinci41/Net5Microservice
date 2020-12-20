@@ -6,6 +6,14 @@ namespace Directory.Entity
 {
     public class Communication
     {
+        public Communication(Guid contactID, string type, string content)
+        {
+            ID = Guid.NewGuid();
+            ContactID = contactID;
+            Type = type;
+            Content = content;
+        }
+
         [Key]
 
         public Guid ID { get; set; }

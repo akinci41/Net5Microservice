@@ -7,6 +7,14 @@ namespace Directory.Entity
 {
     public class Contact
     {
+        public Contact(string name, string surname, string firmName)
+        {
+            ID = Guid.NewGuid();
+            Name = name;
+            Surname = surname;
+            FirmName = firmName;
+        }
+
         [Key]
         public Guid ID { get; set; }
 
