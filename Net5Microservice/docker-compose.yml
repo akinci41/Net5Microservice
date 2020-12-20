@@ -1,0 +1,18 @@
+version: '3.4'
+
+services:
+  postgresql:
+    image: postgres
+    container_name: postgresql
+    ports:
+      - "5430:5432"
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+    restart: always
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+        - 5672:5672
+        - 15672:15672

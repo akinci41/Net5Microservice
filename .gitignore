@@ -10,3 +10,4 @@
 /Net5Microservice/obj
 /Net5Microservice/Feeder/bin/Debug/net5.0
 /Net5Microservice/Feeder/obj
+/Net5Microservice/.docker/rabbitmq
