@@ -1,9 +1,7 @@
-﻿using Publisher.Entity;
-
-namespace Publisher.Utils
+﻿namespace Publisher.Utils
 {
     public interface IEventBus
     {
-        void SendToQueue(QueueMessage message);
+        void SendToQueue(string queueName, string message);
     }
 }

@@ -1,13 +1,12 @@
 ﻿using RabbitMQ.Client;
 using System;
 using System.Text;
-using Publisher.Entity;
 
 namespace Publisher.Utils
 {
     public class EventBus : IEventBus
     {
-        public void SendToQueue(QueueMessage message)
+        public void SendToQueue(string queueName, string message)
         {
             var uri = Environment.GetEnvironmentVariable("RabbitMQ_Url");
 
@@ -16,9 +15,9 @@ namespace Publisher.Utils
             {
                 using (var channel = connection.CreateModel())
                 {
-                    channel.QueueDeclare(queue: message.QueueName, durable: false, exclusive: false, autoDelete: false, arguments: null);
-                    var body = Encoding.UTF8.GetBytes(message.Object);
-                    channel.BasicPublish(exchange: "", routingKey: message.QueueName, basicProperties: null, body: body);
+                    channel.QueueDeclare(queue: queueName, durable: false, exclusive: false, autoDelete: false, arguments: null);
+                    var body = Encoding.UTF8.GetBytes(message);
+                    channel.BasicPublish(exchange: "", routingKey: queueName, basicProperties: null, body: body);
                 }
             }
         }

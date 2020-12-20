@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Publisher.Utils;
-using Publisher.Entity;
 
 namespace Publisher.Controllers
 {
@@ -22,9 +21,9 @@ namespace Publisher.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody] QueueMessage message)
+        public void Post(string queueName, string message)
         {
-            _eventBus.SendToQueue(message);
+            _eventBus.SendToQueue(queueName, message);
         }
     }
 }
