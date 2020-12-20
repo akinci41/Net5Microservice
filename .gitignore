@@ -12,3 +12,4 @@
 /Net5Microservice/Feeder/obj
 /Net5Microservice/.docker/rabbitmq
 /Net5Microservice/Publisher/obj
+/Net5Microservice/Publisher/bin/Debug/net5.0
