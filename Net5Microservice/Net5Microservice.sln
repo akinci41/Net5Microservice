@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{41B001
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publisher", "Publisher\Publisher.csproj", "{F125F493-785F-4F71-98CB-316EC4C0D1F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Consumer", "Consumer\Consumer.csproj", "{455599B8-2D6D-448D-954A-DB146F0BAF65}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{F125F493-785F-4F71-98CB-316EC4C0D1F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F125F493-785F-4F71-98CB-316EC4C0D1F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F125F493-785F-4F71-98CB-316EC4C0D1F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{455599B8-2D6D-448D-954A-DB146F0BAF65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{455599B8-2D6D-448D-954A-DB146F0BAF65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{455599B8-2D6D-448D-954A-DB146F0BAF65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{455599B8-2D6D-448D-954A-DB146F0BAF65}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
