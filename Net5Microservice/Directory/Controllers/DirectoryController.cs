@@ -2,6 +2,7 @@
 using Directory.Entity;
 using System.Collections.Generic;
 using System.Linq;
+using Directory.Integration;
 
 namespace Directory.Controllers
 {
@@ -43,6 +44,7 @@ namespace Directory.Controllers
             var newContact = new Contact(contact.Name, contact.Surname, contact.FirmName);
             _context.Contacts.Add(newContact);
             _context.SaveChanges();
+            PublisherCall.SendToQueue("AddContact", newContact);
             return CreatedAtAction("Get", new { id = newContact.ID }, newContact);
         }
 
@@ -52,6 +54,7 @@ namespace Directory.Controllers
             var contact = _context.Contacts.Where(x => x.ID.ToString() == ID).FirstOrDefault();
             _context.Contacts.Remove(contact);
             _context.SaveChanges();
+            PublisherCall.SendToQueue("RemoveContact", contact);
             return Ok();
         }
 
@@ -61,6 +64,7 @@ namespace Directory.Controllers
             var newCommunication = new Communication(communication.ContactID, communication.Type, communication.Content);
             _context.Communications.Add(newCommunication);
             _context.SaveChanges();
+            PublisherCall.SendToQueue("AddCommunication", newCommunication);
             return CreatedAtAction("Get", new { id = newCommunication.ID }, newCommunication);
         }
 
@@ -70,6 +74,7 @@ namespace Directory.Controllers
             var communication = _context.Communications.Where(x => x.ID.ToString() == ID).FirstOrDefault();
             _context.Communications.Remove(communication);
             _context.SaveChanges();
+            PublisherCall.SendToQueue("RemoveCommunication", communication);
             return Ok();
         }
     }
