@@ -19,6 +19,7 @@
         "Feeder_Url": "localhost:60200",
         "Publisher_Url": "localhost:60300",
         "Consumer_Url": "localhost:60400",
+        "Report_Url": "localhost:60500",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
@@ -32,6 +33,7 @@
         "Feeder_Url": "localhost:50200",
         "Publisher_Url": "localhost:50300",
         "Consumer_Url": "localhost:50400",
+        "Report_Url": "localhost:50500",
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": "true",

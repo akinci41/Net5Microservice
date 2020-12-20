@@ -1,5 +1,4 @@
-﻿{
-  "$schema": "http://json.schemastore.org/launchsettings.json",
+{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
@@ -8,24 +7,43 @@
       "sslPort": 0
     }
   },
+  "$schema": "http://json.schemastore.org/launchsettings.json",
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
+        "RabbitMQ_Url": "localhost",
+        "Directory_Url": "localhost:60100",
+        "Feeder_Url": "localhost:60200",
+        "Publisher_Url": "localhost:60300",
+        "Consumer_Url": "localhost:60400",
+        "Report_Url": "localhost:60500",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "Report": {
       "commandName": "Project",
-      "dotnetRunMessages": "true",
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "http://localhost:50500",
       "environmentVariables": {
+        "RabbitMQ_Url": "localhost",
+        "Directory_Url": "localhost:50100",
+        "Feeder_Url": "localhost:50200",
+        "Publisher_Url": "localhost:50300",
+        "Consumer_Url": "localhost:50400",
+        "Report_Url": "localhost:50500",
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "dotnetRunMessages": "true",
+      "applicationUrl": "http://localhost:50500"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
+      "publishAllPorts": true
     }
   }
 }
