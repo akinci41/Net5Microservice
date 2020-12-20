@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:65039",
+      "applicationUrl": "http://localhost:60400",
       "sslPort": 0
     }
   },
@@ -15,6 +15,10 @@
       "launchUrl": "swagger",
       "environmentVariables": {
         "RabbitMQ_Url": "localhost",
+        "Directory_Url": "localhost:60100",
+        "Feeder_Url": "localhost:60200",
+        "Publisher_Url": "localhost:60300",
+        "Consumer_Url": "localhost:60400",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
@@ -23,10 +27,15 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
+        "RabbitMQ_Url": "localhost",
+        "Directory_Url": "localhost:50100",
+        "Feeder_Url": "localhost:50200",
+        "Publisher_Url": "localhost:50300",
+        "Consumer_Url": "localhost:50400",
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": "true",
-      "applicationUrl": "http://localhost:5000"
+      "applicationUrl": "http://localhost:50400"
     }
   }
 }

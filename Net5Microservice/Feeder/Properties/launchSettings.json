@@ -14,6 +14,11 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
+        "RabbitMQ_Url": "localhost",
+        "Directory_Url": "localhost:60100",
+        "Feeder_Url": "localhost:60200",
+        "Publisher_Url": "localhost:60300",
+        "Consumer_Url": "localhost:60400",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
@@ -22,6 +27,11 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
+        "RabbitMQ_Url": "localhost",
+        "Directory_Url": "localhost:50100",
+        "Feeder_Url": "localhost:50200",
+        "Publisher_Url": "localhost:50300",
+        "Consumer_Url": "localhost:50400",
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": "true",
