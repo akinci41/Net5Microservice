@@ -15,3 +15,10 @@ services:
     build:
       context: .
       dockerfile: Directory/Dockerfile
+
+  feeder:
+    image: ${DOCKER_REGISTRY-}feeder
+    build:
+      context: .
+      dockerfile: Feeder/Dockerfile
+
