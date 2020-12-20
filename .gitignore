@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/Net5Microservice/.vs/Net5Microservice
+/Net5Microservice/Directory/obj
+/Net5Microservice/Directory/bin/Debug/net5.0
