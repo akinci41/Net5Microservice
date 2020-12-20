@@ -15,3 +15,5 @@
 /Net5Microservice/Publisher/bin/Debug/net5.0
 /Net5Microservice/Consumer/bin/Debug/net5.0
 /Net5Microservice/Consumer/obj
+/Net5Microservice/Report/obj
+/Net5Microservice/Report/bin/Debug/net5.0
