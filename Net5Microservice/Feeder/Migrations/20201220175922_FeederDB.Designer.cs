@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Feeder.Migrations
 {
     [DbContext(typeof(FeederContext))]
-    [Migration("20201220121414_FeederDB")]
+    [Migration("20201220175922_FeederDB")]
     partial class FeederDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -59,6 +59,48 @@ namespace Feeder.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Contacts");
+                });
+
+            modelBuilder.Entity("Feeder.Entity.Report", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("varchar(10)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Reports");
+                });
+
+            modelBuilder.Entity("Feeder.Entity.ReportDetail", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .UseIdentityByDefaultColumn();
+
+                    b.Property<int>("ContactCount")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Location")
+                        .HasColumnType("varchar(250)");
+
+                    b.Property<int>("PhoneCount")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("ReportID")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("ReportDetails");
                 });
 #pragma warning restore 612, 618
         }

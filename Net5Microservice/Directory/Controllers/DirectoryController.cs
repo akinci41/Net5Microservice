@@ -77,5 +77,12 @@ namespace Directory.Controllers
             PublisherCall.SendToQueue("RemoveCommunication", communication);
             return Ok();
         }
+
+        [HttpGet("GetReport")]
+        public ActionResult GetReport()
+        {
+            PublisherCall.SendToQueue("GetReport", "Create a new Report");
+            return Ok("New report request received");
+        }
     }
 }

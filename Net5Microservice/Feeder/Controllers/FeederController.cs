@@ -3,6 +3,7 @@ using Feeder.Entity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
+using Feeder.Utils;
 
 namespace Feeder.Controllers
 {
@@ -32,7 +33,7 @@ namespace Feeder.Controllers
             return Ok();
         }
 
-        [HttpGet("RemoveContact")]
+        [HttpPost, Route("RemoveContact")]
         public ActionResult RemoveContact(string message)
         {
             var contact = JsonSerializer.Deserialize<Contact>(message);
@@ -51,7 +52,7 @@ namespace Feeder.Controllers
             return Ok();
         }
 
-        [HttpGet("RemoveCommunication")]
+        [HttpPost, Route("RemoveCommunication")]
         public ActionResult RemoveCommunication(string message)
         {
             var communication = JsonSerializer.Deserialize<Communication>(message);
@@ -59,6 +60,16 @@ namespace Feeder.Controllers
             _context.Communications.Remove(_communication);
             _context.SaveChanges();
             return Ok();
+        }
+
+        [HttpPost, Route("GetReport")]
+        public ActionResult GetReport(string message)
+        {
+            var report = new Report();
+            _context.Reports.Add(report);
+            _context.SaveChanges();
+            Reporter.GenerateReportAsync(report.ID);
+            return Ok("New report request received");
         }
     }
 }

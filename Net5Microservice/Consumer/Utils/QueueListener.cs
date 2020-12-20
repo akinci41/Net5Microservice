@@ -19,6 +19,7 @@ namespace Consumer.Utils
             Channel.QueueDeclare(queue: "RemoveContact", durable: false, exclusive: false, autoDelete: false, arguments: null);
             Channel.QueueDeclare(queue: "AddCommunication", durable: false, exclusive: false, autoDelete: false, arguments: null);
             Channel.QueueDeclare(queue: "RemoveCommunication", durable: false, exclusive: false, autoDelete: false, arguments: null);
+            Channel.QueueDeclare(queue: "GetReport", durable: false, exclusive: false, autoDelete: false, arguments: null);
 
             var consumer1 = new EventingBasicConsumer(Channel);
             consumer1.Received += (model, ea) =>
@@ -52,11 +53,20 @@ namespace Consumer.Utils
 
                 FeederCall.SendToFeeder("RemoveCommunication", message);
             };
+            var consumer5 = new EventingBasicConsumer(Channel);
+            consumer5.Received += (model, ea) =>
+            {
+                var body = ea.Body.ToArray();
+                var message = Encoding.UTF8.GetString(body);
+
+                FeederCall.SendToFeeder("GetReport", "");
+            };
 
             Channel.BasicConsume(queue: "AddContact", autoAck: true, consumer: consumer1);
             Channel.BasicConsume(queue: "RemoveContact", autoAck: true, consumer: consumer2);
             Channel.BasicConsume(queue: "AddCommunication", autoAck: true, consumer: consumer3);
             Channel.BasicConsume(queue: "RemoveCommunication", autoAck: true, consumer: consumer4);
+            Channel.BasicConsume(queue: "GetReport", autoAck: true, consumer: consumer5);
         }
 
         public void Deregister()
