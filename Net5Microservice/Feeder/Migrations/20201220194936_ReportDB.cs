@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Feeder.Migrations
 {
-    public partial class FeederDB : Migration
+    public partial class ReportDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

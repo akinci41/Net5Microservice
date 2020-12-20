@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Feeder.Migrations
 {
     [DbContext(typeof(FeederContext))]
-    [Migration("20201220175922_FeederDB")]
-    partial class FeederDB
+    [Migration("20201220194936_ReportDB")]
+    partial class ReportDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
