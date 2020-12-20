@@ -1,15 +1,10 @@
+using Consumer.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Consumer
 {
@@ -25,6 +20,7 @@ namespace Consumer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<QueueListener>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -51,6 +47,35 @@ namespace Consumer
             {
                 endpoints.MapControllers();
             });
+
+            app.UseQueueListener();
+        }
+    }
+
+    public static class ApplicationBuilderExtention
+    {
+        private static QueueListener _listener { get; set; }
+
+        public static IApplicationBuilder UseQueueListener(this IApplicationBuilder app)
+        {
+            _listener = app.ApplicationServices.GetService<QueueListener>();
+
+            var lifetime = app.ApplicationServices.GetService<IHostApplicationLifetime>();
+
+            lifetime.ApplicationStarted.Register(OnStarted);
+            lifetime.ApplicationStopping.Register(OnStopping);
+
+            return app;
+        }
+
+        private static void OnStarted()
+        {
+            _listener.Register();
+        }
+
+        private static void OnStopping()
+        {
+            _listener.Deregister();
         }
     }
 }
