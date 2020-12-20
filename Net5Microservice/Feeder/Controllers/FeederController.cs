@@ -2,6 +2,7 @@
 using Feeder.Entity;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 
 namespace Feeder.Controllers
 {
@@ -23,35 +24,39 @@ namespace Feeder.Controllers
         }
 
         [HttpPost, Route("AddContact")]
-        public ActionResult AddContact(Contact contact)
+        public ActionResult AddContact(string message)
         {
+            var contact = JsonSerializer.Deserialize<Contact>(message);
             _context.Contacts.Add(contact);
             _context.SaveChanges();
             return Ok();
         }
 
         [HttpGet("RemoveContact")]
-        public ActionResult RemoveContact(string ID)
+        public ActionResult RemoveContact(string message)
         {
-            var contact = _context.Contacts.Where(x => x.ID.ToString() == ID).FirstOrDefault();
-            _context.Contacts.Remove(contact);
+            var contact = JsonSerializer.Deserialize<Contact>(message);
+            var _contact = _context.Contacts.Where(x => x.ID == contact.ID).FirstOrDefault();
+            _context.Contacts.Remove(_contact);
             _context.SaveChanges();
             return Ok();
         }
 
         [HttpPost, Route("AddCommunication")]
-        public ActionResult AddCommunication(Communication communication)
+        public ActionResult AddCommunication(string message)
         {
+            var communication = JsonSerializer.Deserialize<Communication>(message);
             _context.Communications.Add(communication);
             _context.SaveChanges();
             return Ok();
         }
 
         [HttpGet("RemoveCommunication")]
-        public ActionResult RemoveCommunication(string ID)
+        public ActionResult RemoveCommunication(string message)
         {
-            var communication = _context.Communications.Where(x => x.ID.ToString() == ID).FirstOrDefault();
-            _context.Communications.Remove(communication);
+            var communication = JsonSerializer.Deserialize<Communication>(message);
+            var _communication = _context.Communications.Where(x => x.ID == communication.ID).FirstOrDefault();
+            _context.Communications.Remove(_communication);
             _context.SaveChanges();
             return Ok();
         }

@@ -1,4 +1,5 @@
-﻿using RabbitMQ.Client;
+﻿using Consumer.Integration;
+using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace Consumer.Utils
                 var body = ea.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
 
-                //TODO: do some actions here
+                FeederCall.SendToFeeder("AddContact", message);
             };
             var consumer2 = new EventingBasicConsumer(Channel);
             consumer2.Received += (model, ea) =>
@@ -33,7 +34,7 @@ namespace Consumer.Utils
                 var body = ea.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
 
-                //TODO: do some actions here
+                FeederCall.SendToFeeder("RemoveContact", message);
             };
             var consumer3 = new EventingBasicConsumer(Channel);
             consumer3.Received += (model, ea) =>
@@ -41,7 +42,7 @@ namespace Consumer.Utils
                 var body = ea.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
 
-                //TODO: do some actions here
+                FeederCall.SendToFeeder("AddCommunication", message);
             };
             var consumer4 = new EventingBasicConsumer(Channel);
             consumer4.Received += (model, ea) =>
@@ -49,7 +50,7 @@ namespace Consumer.Utils
                 var body = ea.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
 
-                //TODO: do some actions here
+                FeederCall.SendToFeeder("RemoveCommunication", message);
             };
 
             Channel.BasicConsume(queue: "AddContact", autoAck: true, consumer: consumer1);
