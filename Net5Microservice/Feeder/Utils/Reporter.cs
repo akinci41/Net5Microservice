@@ -8,25 +8,31 @@ namespace Feeder.Utils
 {
     public class Reporter
     {
-        public static void GenerateReportAsync(Guid guid)
+        private readonly FeederContext _context;
+
+        public Reporter()
+        {
+            _context = new FeederContext();
+        }
+
+        public void GenerateReportAsync(Guid guid)
         {
             Thread thread = new Thread(() => GenerateReport(guid));
             thread.Start();
         }
 
-        private static void GenerateReport(Guid guid)
+        private void GenerateReport(Guid guid)
         {
             Thread.Sleep(5000); //sleep ten seconds to see pending status :)
 
-            var context = new FeederContext();
-            var report = context.Reports.Where(x => x.ID == guid).FirstOrDefault();
+            var report = _context.Reports.Where(x => x.ID == guid).FirstOrDefault();
             report.Status = (int)ReportStatus.Preparing;
-            context.Reports.Attach(report).Property(x => x.Status).IsModified = true;
-            context.SaveChanges();
+            _context.Reports.Attach(report).Property(x => x.Status).IsModified = true;
+            _context.SaveChanges();
 
             Thread.Sleep(5000); //sleep ten seconds to see preparing status :)
 
-            var distinctLocation = context.Communications.Where(x => x.Type == "3").GroupBy(x => x.Content).Select(x => x.Key).ToList(); //get the distinct location list
+            var distinctLocation = _context.Communications.Where(x => x.Type == "3").GroupBy(x => x.Content).Select(x => x.Key).ToList(); //get the distinct location list
             var list = new List<ReportDetail>();
 
             //iterate list to create report
@@ -37,20 +43,20 @@ namespace Feeder.Utils
                 detail.Location = location;
 
                 //one contact may have different location info, therefore we must eliminate recurrence
-                var distinctContactList = context.Communications.Where(x => x.Type == "3" && x.Content == location).Select(y => y.ContactID).Distinct().ToList(); //distinct contact list in current location
+                var distinctContactList = _context.Communications.Where(x => x.Type == "3" && x.Content == location).Select(y => y.ContactID).Distinct().ToList(); //distinct contact list in current location
                 detail.ContactCount = distinctContactList.Count;
 
-                var distinctPhoneList = context.Communications.Where(x => x.Type == "2" && distinctContactList.Contains(x.ContactID)).Select(y => y.ID).Distinct().ToList(); //distinct phone ID list 
+                var distinctPhoneList = _context.Communications.Where(x => x.Type == "2" && distinctContactList.Contains(x.ContactID)).Select(y => y.ID).Distinct().ToList(); //distinct phone ID list 
                 detail.PhoneCount = distinctPhoneList.Count;
                 list.Add(detail);
             }
 
-            context.ReportDetails.AddRange(list);
-            context.SaveChanges();
+            _context.ReportDetails.AddRange(list);
+            _context.SaveChanges();
 
             report.Status = (int)ReportStatus.Ready;
-            context.Reports.Attach(report).Property(x => x.Status).IsModified = true;
-            context.SaveChanges();
+            _context.Reports.Attach(report).Property(x => x.Status).IsModified = true;
+            _context.SaveChanges();
         }
     }
 }

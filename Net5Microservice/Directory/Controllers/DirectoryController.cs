@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Directory.Entity;
+﻿using Directory.Entity;
+using Directory.Integration;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
-using Directory.Integration;
 
 namespace Directory.Controllers
 {
@@ -20,7 +20,7 @@ namespace Directory.Controllers
         [HttpGet]
         public string Get()
         {
-            return "Hello from " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Name + " Api";
+            return "Hello from " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Name + " Api. Running on " + System.Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
         }
 
         [HttpGet("GetContactList")]

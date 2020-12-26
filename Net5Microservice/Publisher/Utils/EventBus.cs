@@ -1,5 +1,4 @@
 ﻿using RabbitMQ.Client;
-using System;
 using System.Text;
 
 namespace Publisher.Utils
@@ -8,7 +7,7 @@ namespace Publisher.Utils
     {
         public void SendToQueue(string queueName, string message)
         {
-            var uri = Environment.GetEnvironmentVariable("RabbitMQ_Url");
+            var uri = Startup.StaticConfig.GetSection("Parameters")["RabbitMQ_Url"];
 
             var factory = new ConnectionFactory() { HostName = uri };
             using (var connection = factory.CreateConnection())

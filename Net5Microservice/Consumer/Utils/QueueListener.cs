@@ -1,8 +1,6 @@
 ﻿using Consumer.Integration;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using System;
-using System.Linq;
 using System.Text;
 
 namespace Consumer.Utils
@@ -76,7 +74,7 @@ namespace Consumer.Utils
 
         public QueueListener()
         {
-            var uri = Environment.GetEnvironmentVariable("RabbitMQ_Url");
+            var uri = Startup.StaticConfig.GetSection("Parameters")["RabbitMQ_Url"];
 
             this.Factory = new ConnectionFactory() { HostName = uri };
             this.Connection = Factory.CreateConnection();

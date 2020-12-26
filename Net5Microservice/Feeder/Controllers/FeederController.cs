@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Feeder.Entity;
-using System.Collections.Generic;
+﻿using Feeder.Entity;
+using Feeder.Utils;
+using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Text.Json;
-using Feeder.Utils;
 
 namespace Feeder.Controllers
 {
@@ -21,7 +20,7 @@ namespace Feeder.Controllers
         [HttpGet]
         public string Get()
         {
-            return "Hello from " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Name + " Api";
+            return "Hello from " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Name + " Api. Running on " + System.Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
         }
 
         [HttpPost, Route("AddContact")]
@@ -68,8 +67,17 @@ namespace Feeder.Controllers
             var report = new Report();
             _context.Reports.Add(report);
             _context.SaveChanges();
-            Reporter.GenerateReportAsync(report.ID);
+
+            var reporter = new Reporter();
+            reporter.GenerateReportAsync(report.ID);
+
             return Ok("New report request received");
+        }
+
+        [HttpPost, Route("GetEnv")]
+        public string GetEnv()
+        {
+            return "RabbitMQ_Url : " + Startup.StaticConfig.GetSection("Parameters")["RabbitMQ_Url"] + " ; CS : " + Startup.StaticConfig.GetSection("ConnectionStrings")["DefaultConnection"];
         }
     }
 }

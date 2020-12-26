@@ -16,3 +16,54 @@ services:
     ports:
         - 5672:5672
         - 15672:15672
+  directory:
+    image: directory_img
+    container_name: directory
+    build:
+      context: .
+      dockerfile: Directory/Dockerfile
+    ports:
+        - 40100:80
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+  feeder:
+    image: feeder_img
+    container_name: feeder
+    build:
+      context: .
+      dockerfile: Feeder/Dockerfile
+    ports:
+        - 40200:80
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+  publisher:
+    image: publisher_img
+    container_name: publisher
+    build:
+      context: .
+      dockerfile: Publisher/Dockerfile
+    ports:
+        - 40300:80
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+  consumer:
+    image: consumer_img
+    container_name: consumer
+    build:
+      context: .
+      dockerfile: Consumer/Dockerfile
+    ports:
+        - 40400:80
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    restart: always
+  report:
+    image: report_img
+    container_name: report
+    build:
+      context: .
+      dockerfile: Report/Dockerfile
+    ports:
+        - 40500:80
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production

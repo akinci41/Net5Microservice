@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Consumer.Controllers
 {
@@ -21,7 +18,7 @@ namespace Consumer.Controllers
         [HttpGet]
         public string Get()
         {
-            return "Hello from " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Name + " Api";
+            return "Hello from " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Name + " Api. Running on " + Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
         }
     }
 }

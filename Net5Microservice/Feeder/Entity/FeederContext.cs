@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace Feeder.Entity
 {
@@ -7,8 +6,7 @@ namespace Feeder.Entity
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var cs = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("ConnectionStrings")["DefaultConnection"];
-            optionsBuilder.UseNpgsql(cs);
+            optionsBuilder.UseNpgsql(Startup.StaticConfig.GetSection("ConnectionStrings")["DefaultConnection"]);
         }
         public FeederContext() { }
         public FeederContext(DbContextOptions<FeederContext> options) : base(options) { }

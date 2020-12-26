@@ -17,7 +17,7 @@ namespace Publisher.Controllers
         [HttpGet]
         public string Get()
         {
-            return "Hello from " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Name + " Api";
+            return "Hello from " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Name + " Api. Running on " + System.Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
         }
 
         [HttpPost]
