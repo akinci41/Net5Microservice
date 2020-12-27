@@ -17,3 +17,5 @@
 /Net5Microservice/Consumer/obj
 /Net5Microservice/Report/obj
 /Net5Microservice/Report/bin/Debug/net5.0
+/Net5Microservice/ClientApp/bin/Debug/netcoreapp3.1
+/Net5Microservice/ClientApp/obj
