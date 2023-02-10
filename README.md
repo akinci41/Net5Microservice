@@ -42,6 +42,8 @@ Your can use the console application to test the entire system (includes creatin
 Run following commands in application root directory where this file (README.MD) is located via PowerShell or Bash Shell.
 
 ```bash
+cd .\Net5Microservice\
+cd .\ClientApp\
 dotnet publish -c Debug
 dotnet run ./bin/Debug/net5.0/ClientApp.dll
 ```
